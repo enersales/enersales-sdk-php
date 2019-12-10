@@ -35,7 +35,9 @@ class EnersalesClient {
     private $fileChunkLength = 2*1024*1024;
 
 	public function __construct(array $args){
-		$this->env = $args['env'];
+		if( isset($args['env']) ){
+			$this->env = $args['env'];
+		}
 		
 		if( isset($args['api']) ){
 			$this->api = $args['api'];

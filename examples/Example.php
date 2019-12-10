@@ -26,7 +26,7 @@ class ExampleUnit {
     public function fileUpload(){
 
         $res = $this->client->fileUpload([
-            'file'=>__DIR__.'/uploadTest.xlsx',
+            'file'=>__DIR__.'/fileUploadTest.xlsx',
             'deal_id'=> 2054,
             'person_id'=>'',
             'organization_id'=>'',
