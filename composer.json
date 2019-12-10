@@ -1,0 +1,23 @@
+{
+    "name": "enersales/enersales-sdk-php",
+    "description": "Enersales SDK for PHP - User Enersales services in your PHP project",
+    "keywords": ["enersales", "crm"],
+    "type": "library",
+    "require": {
+		"php": ">=5.5",
+        "guzzlehttp/guzzle": "^6.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "Enersales\\": "src/"
+        },
+        "files": ["src/functions.php"]
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Enersales",
+            "homepage": "https://enersales.com"
+        }
+    ]
+}
