@@ -1,7 +1,7 @@
 <?php
 namespace Enersales\Examples;
-require __DIR__.'/../src/EnersalesClient.php';
 require __DIR__.'/../vendor/autoload.php';
+require __DIR__.'/../src/EnersalesClient.php';
 
 class ExampleUnit {
 
@@ -154,7 +154,7 @@ class ExampleUnit {
         var_dump($res);
     }
     public function getForm(){
-        $res = $this->client->getFormConfig('default', [
+        $res = $this->client->getForm('default', [
             'object_type'=>'deals',
             "subobject_type"=>"cv",
             "layout"=>true

@@ -31,7 +31,7 @@ class EnersalesClient {
 	private $urlOrganizationSearch = "organizations";
 	private $urlProductSearch = "products";
     private $urlGetDataSchema = "data-schemes";
-    private $urlGetFormConfig = "forms2/get";
+    private $urlGetForm = "forms/get";
 
     private $fileChunkLength = 2097152;
 
@@ -323,8 +323,8 @@ class EnersalesClient {
 
         return $responseBody;
     }
-    public function getFormConfig($formCode, array $data){
-        $url = $this->urlGetFormConfig;
+    public function getForm($formCode, array $data){
+        $url = $this->urlGetForm;
 
         $url = $url."/".$formCode;
 
