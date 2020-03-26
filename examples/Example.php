@@ -1,6 +1,7 @@
 <?php
 namespace Enersales\Examples;
 require __DIR__.'/../src/EnersalesClient.php';
+require __DIR__.'/../vendor/autoload.php';
 
 class ExampleUnit {
 
@@ -144,12 +145,23 @@ class ExampleUnit {
 
     }
 
-    public function getForm(){
-        $res = $this->client->getFormConfig('deals_add', []);
+    public function getDataScheme(){
+        $res = $this->client->getDataScheme([
+            'object_type'=>'deals',
+            'subobject_type'=>'default'
+        ]);
 
         var_dump($res);
     }
+    public function getForm(){
+        $res = $this->client->getFormConfig('default', [
+            'object_type'=>'deals',
+            "subobject_type"=>"cv",
+            "layout"=>true
+        ]);
 
+        var_dump($res);
+    }
     public function searchPerson(){
         $res = $this->client->search('persons', [
             'persons'=>[
