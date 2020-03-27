@@ -1,7 +1,7 @@
 {
     "name": "enersales/enersales-sdk-php",
     "description": "Enersales SDK for PHP - User Enersales services in your PHP project",
-    "keywords": ["enersales", "crm"],
+    "keywords": ["enersales", "crm", "sdk", "php"],
     "type": "library",
     "require": {
 		"php": ">=5.5",
