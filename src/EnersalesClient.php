@@ -30,11 +30,12 @@ class EnersalesClient {
 	private $urlPersonSearch = "persons";
 	private $urlOrganizationSearch = "organizations";
 	private $urlProductSearch = "products";
-    private $urlGetFormConfig = "fields/get-form-config";
-	
-    private $fileChunkLength = 2*1024*1024;
+    private $urlGetDataSchema = "data-schemes";
+    private $urlGetForm = "forms/get";
 
-	public function __construct(array $args){
+    private $fileChunkLength = 2097152;
+
+    public function __construct(array $args){
 		if( isset($args['env']) ){
 			$this->env = $args['env'];
 		}
@@ -307,12 +308,31 @@ class EnersalesClient {
         return $responseBody;
 	}
 
-    public function getFormConfig(string $entityType, $data){
-        $url = $this->urlGetFormConfig;
+    public function getDataScheme(array $data){
+        $url = $this->urlGetDataSchema;
+        $options = [
+            'query'=> $data
+        ];
+        $response = $this->request('GET', $url, $options);
+        $responseRaw = $response->getBody()->getContents();
+        $responseBody = json_decode($responseRaw);
 
-        $url = $url."/".$entityType;
+        if(empty($responseBody)){
+            throw new \Exception($responseRaw);
+        }
 
-        $response = $this->request('GET', $url, $data);
+        return $responseBody;
+    }
+    public function getForm($formCode, array $data){
+        $url = $this->urlGetForm;
+
+        $url = $url."/".$formCode;
+
+        $options = [
+            'query'=> $data
+        ];
+
+        $response = $this->request('GET', $url, $options);
         $responseRaw = $response->getBody()->getContents();
         $responseBody = json_decode($responseRaw);
 
