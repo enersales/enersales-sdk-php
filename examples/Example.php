@@ -8,15 +8,14 @@ class ExampleUnit {
     private $client;
 
     public function __construct(){
-//        $credentials = json_decode(file_get_contents("./credentials/credentials-dev.json"), true); // Change this line to get your credentials
-
-        $credentials = [
-            'env'=>'dev',
-            'instance'=>'core01',
-            'access_key'=>'4234b2e0-9beb-920f-462d-d0ca9345120b',
-            'secret_key'=>'A~xOG_JsK+Vm7f02I0v6ShEsw!EeO2ts~BA=E$8FTj-AdcFggtVTFJ_sXOyRFDf7o9v9o3Z4NMLHP4yrPbl1I-1PU5PZjkhqvdSNOQtiEQbtj8Eg4IFZjWp0UPwnIKCJ',
-        ];
-
+        $credentials = json_decode(file_get_contents("./credentials/credentials-dev.json"), true); // Change this line to get your credentials
+        /*
+			$credentials = [
+				'instance'=>'your instance code',
+				'access_key'=>'YOUR ACCESS KEY',
+				'secret_key'=>'YOUR SECRET KEY',
+			]
+        */
         $this->client = new \Enersales\EnersalesClient($credentials);
     }
     
