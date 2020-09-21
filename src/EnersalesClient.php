@@ -26,6 +26,11 @@ class EnersalesClient {
 	private $urlOrganizationUpdate = "organizations";
 	private $urlProductCreate = "products";
 	private $urlProductUpdate = "products";
+	private $urlActivitiesCreate = "activities/save";
+	private $urlActivitiesUpdate = "activities/save";
+	private $urlActivitiesDelete = "activities/softdelete";
+	private $urlActivitiesGetOne = "activities/get";
+	private $urlActivitiesSearch = "activities";
 	private $urlDealSearch = "deals";
 	private $urlPersonSearch = "persons";
 	private $urlOrganizationSearch = "organizations";
@@ -260,11 +265,15 @@ class EnersalesClient {
             case "products":
                 $url = $this->urlProductCreate;
             break;
+            case "activities":
+                $url = $this->urlActivitiesCreate;
+            break;
 		}
 		
 		$options = [
 			'form_params'=>$data
 		];
+
 		$response = $this->request('POST', $url, $options);
         $responseRaw = $response->getBody()->getContents();
 		$responseBody = json_decode($responseRaw);
@@ -291,6 +300,9 @@ class EnersalesClient {
             case "products":
                 $url = $this->urlProductUpdate;
                 break;
+            case "activities":
+                $url = $this->urlActivitiesUpdate;
+                break;
         }
         $url = $url."/".$id;
 
@@ -308,6 +320,41 @@ class EnersalesClient {
         return $responseBody;
 	}
 
+    public function delete($id){
+        $url = $this->urlActivitiesDelete."/".$id;
+        $options = [
+            'query'=> ''
+        ];
+        $response = $this->request('POST', $url, $options);
+        $responseRaw = $response->getBody()->getContents();
+        $responseBody = json_decode($responseRaw);
+
+        if(empty($responseBody)){
+            throw new \Exception($responseRaw);
+        }
+
+        return $responseBody;
+    }
+
+    public function getActivity($id){
+
+        $url = $this->urlActivitiesGetOne."/".$id;
+
+        $options = [
+            'query'=> ''
+        ];
+
+        $response = $this->request('GET', $url, $options);
+        $responseRaw = $response->getBody()->getContents();
+        $responseBody = json_decode($responseRaw);
+
+        if(empty($responseBody)){
+            throw new \Exception($responseRaw);
+        }
+
+        return $responseBody;
+    }
+
     public function getDataScheme(array $data){
         $url = $this->urlGetDataSchema;
         $options = [
@@ -323,6 +370,7 @@ class EnersalesClient {
 
         return $responseBody;
     }
+
     public function getForm($formCode, array $data){
         $url = $this->urlGetForm;
 
@@ -357,6 +405,9 @@ class EnersalesClient {
                 break;
             case "products":
                 $url = $this->urlProductSearch;
+                break;
+            case "activities":
+                $url = $this->urlActivitiesSearch;
                 break;
         }
 

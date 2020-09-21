@@ -8,14 +8,15 @@ class ExampleUnit {
     private $client;
 
     public function __construct(){
-        $credentials = json_decode(file_get_contents("./credentials/credentials-dev.json"), true); // Change this line to get your credentials
-        /*
-			$credentials = [
-				'instance'=>'your instance code',
-				'access_key'=>'YOUR ACCESS KEY',
-				'secret_key'=>'YOUR SECRET KEY',
-			]
-        */
+//        $credentials = json_decode(file_get_contents("./credentials/credentials-dev.json"), true); // Change this line to get your credentials
+
+        $credentials = [
+            'env'=>'dev',
+            'instance'=>'core01',
+            'access_key'=>'4234b2e0-9beb-920f-462d-d0ca9345120b',
+            'secret_key'=>'A~xOG_JsK+Vm7f02I0v6ShEsw!EeO2ts~BA=E$8FTj-AdcFggtVTFJ_sXOyRFDf7o9v9o3Z4NMLHP4yrPbl1I-1PU5PZjkhqvdSNOQtiEQbtj8Eg4IFZjWp0UPwnIKCJ',
+        ];
+
         $this->client = new \Enersales\EnersalesClient($credentials);
     }
     
@@ -38,7 +39,7 @@ class ExampleUnit {
     
     public function createDeal(){
         $res = $this->client->create('Deals', [
-            'titolo_opportunita'=>'Test deal from the API TEST2',
+            'titolo_opportunita'=>'Aldaro SDK FIRST TIME 3',
             "visibility"=> 1,
             "data_lead"=> "2019-07-17T15:21:55+00:00",
             "user_id"=> 1,
@@ -53,6 +54,8 @@ class ExampleUnit {
             "campaign_id"=> "3",
             "label_id"=> "3",
             "influencer"=> "21",
+            'subobject_type'=>"cv",
+            'deal_ids'=>['2351']
         ]);
 
         var_dump($res);
@@ -170,6 +173,55 @@ class ExampleUnit {
             ],
             'page'=>1,
             'limit'=>30
+        ]);
+
+        var_dump($res);
+    }
+    public function createActivity(){
+        $res = $this->client->create('activities', [
+            'note'=>"Activity from API Notes",
+            'titolo'=>"Activity from",
+            'type'=>0,
+            'datatime_activity'=>'2020-09-22T13:00:00+02:00',
+            'end_activity'=>'2020-09-22T14:00:00+02:00',
+            'assigned_id'=>30,
+            'done'=>30,
+            'all_day'=>false,
+            'deal_id'=>2351,
+            'organization_id'=>18915,
+            'person_ids'=>['1311']
+        ]);
+
+        var_dump($res);
+    }
+    public function updateActivity(){
+        $res = $this->client->update('activities','2453', [
+            'id'=>2453,
+            'note'=>"Activity from API Notes",
+            'titolo'=>"Activity from updated",
+        ]);
+        var_dump($res);
+    }
+    public function deleteActivity(){
+        $res = $this->client->delete('2429');
+        var_dump($res);
+    }
+    public function getActivity(){
+        $res = $this->client->getActivity('2448');
+        var_dump($res);
+    }
+    public function getAllActivity(){
+        $res = $this->client->search('activities', [
+            'date'=>'2020-09-15',
+            //'person_ids'=>[1261,1997]
+            //'titolo'=>'testactivities',
+            //'deal_id'=>'2852',
+            //'organization_id'=>'18140',
+            //'done'=>true
+//            'date_range'=>[
+//                'start'=>'2020-09-15',
+//                'end'=>'2020-09-16'
+//            ]
         ]);
 
         var_dump($res);
