@@ -18,24 +18,35 @@ class EnersalesClient {
 	private $urlAuthLogin = "auth/login";
 	private $urlAuthRefresh = "auth/refresh";
 	private $urlFileUpload = "files/upload";
+
+	private $urlUserGetOne = "user-manager/users/get";
+	private $urlUsersSearch = "users-manager/users";
+
+
 	private $urlDealCreate = "deals";
 	private $urlDealUpdate = "deals";
+	
 	private $urlPersonCreate = "persons";
 	private $urlPersonUpdate = "persons";
+	
 	private $urlOrganizationCreate = "organizations";
 	private $urlOrganizationUpdate = "organizations";
+	
 	private $urlProductCreate = "products";
 	private $urlProductUpdate = "products";
+	
 	private $urlActivitiesCreate = "activities/save";
 	private $urlActivitiesUpdate = "activities/save";
 	private $urlActivitiesDelete = "activities/softdelete";
 	private $urlActivitiesGetOne = "activities/get";
 	private $urlActivitiesSearch = "activities";
+
 	private $urlDealSearch = "deals";
 	private $urlPersonSearch = "persons";
 	private $urlOrganizationSearch = "organizations";
 	private $urlProductSearch = "products";
-    private $urlGetDataSchema = "data-schemes";
+	
+	private $urlGetDataSchema = "data-schemes";
     private $urlGetForm = "forms/get";
 
     private $fileChunkLength = 2097152;
@@ -353,6 +364,35 @@ class EnersalesClient {
         }
 
         return $responseBody;
+	}
+	
+	/**
+	 * @todo add code for supporting deals,persons,org
+	 */
+	public function get(string $entity, $id ){
+
+		switch($entity){
+			case 'users':
+				$url = $this->urlUserGetOne."/".$id;
+			break;
+			case 'activities':
+				$url = $this->urlActivitiesGetOne."/".$id;
+			break;
+		}
+
+        $options = [
+            'query'=> ''
+        ];
+
+        $response = $this->request('GET', $url, $options);
+        $responseRaw = $response->getBody()->getContents();
+        $responseBody = json_decode($responseRaw);
+
+        if(empty($responseBody)){
+            throw new \Exception($responseRaw);
+        }
+
+        return $responseBody;
     }
 
     public function getDataScheme(array $data){
@@ -408,7 +448,11 @@ class EnersalesClient {
                 break;
             case "activities":
                 $url = $this->urlActivitiesSearch;
-                break;
+				break;
+				
+			case "users":
+				$url = $this->urlUsersSearch;
+				break;
         }
 
         $options = [

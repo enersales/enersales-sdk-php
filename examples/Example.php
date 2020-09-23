@@ -8,14 +8,15 @@ class ExampleUnit {
     private $client;
 
     public function __construct(){
-        $credentials = json_decode(file_get_contents("./credentials/credentials-dev.json"), true); // Change this line to get your credentials
-        /*
-			$credentials = [
-				'instance'=>'your instance code',
-				'access_key'=>'YOUR ACCESS KEY',
-				'secret_key'=>'YOUR SECRET KEY',
-			]
-        */
+        // $credentials = json_decode(file_get_contents("./credentials/credentials-dev.json"), true); // Change this line to get your credentials
+       
+        $credentials = [
+            'env'=>'dev',
+            'instance'=>'core01',
+            'access_key'=>'7ab07bef-8adc-d1b3-a5fc-fc3b3b784c6d',
+            'secret_key'=>'RIUdB-ivMaRxjueW0SPz9JXxe$1oU9awBS97LnzgI~bsllT8zt2W19FhJ=yGCeuXSynGfUJPH0gHUZHTJVoaH3FBK69ZT2yH8$c=xuZ6W-5vpunqJrMi6nfP~O3$FOJF',
+        ];
+    
         $this->client = new \Enersales\EnersalesClient($credentials);
     }
     
@@ -221,6 +222,26 @@ class ExampleUnit {
 //                'start'=>'2020-09-15',
 //                'end'=>'2020-09-16'
 //            ]
+        ]);
+
+        var_dump($res);
+    }
+
+    public function getUser(){
+        $res = $this->client->get('users',10);
+
+        var_dump($res);
+    }
+
+    public function searchUser(){
+
+        $res = $this->client->search('users', [
+            'users'=>[
+                "nome"=>"Mario",
+                "cognome"=>"Rosi",
+            ],
+            'page'=>1,
+            'limit'=>30
         ]);
 
         var_dump($res);
