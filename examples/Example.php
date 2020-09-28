@@ -13,8 +13,8 @@ class ExampleUnit {
         $credentials = [
             'env'=>'dev',
             'instance'=>'core01',
-            'access_key'=>'7ab07bef-8adc-d1b3-a5fc-fc3b3b784c6d',
-            'secret_key'=>'RIUdB-ivMaRxjueW0SPz9JXxe$1oU9awBS97LnzgI~bsllT8zt2W19FhJ=yGCeuXSynGfUJPH0gHUZHTJVoaH3FBK69ZT2yH8$c=xuZ6W-5vpunqJrMi6nfP~O3$FOJF',
+            'access_key'=>'14ee5a59-c8ce-e604-3230-cedf9c605058',
+            'secret_key'=>'n~Du2!8bwyPrrwhqBs~pBzt3!$+qHjh7!Nq=2koTrfFKjNIR0ynxFNRS-Q_hD!Fv01NeuO5OulE5QzeszymTxXtEk0r~U$LNgHPIz8HrdcpHYLlQmO2bKd9rL_bfc0c8',
         ];
     
         $this->client = new \Enersales\EnersalesClient($credentials);
@@ -228,22 +228,16 @@ class ExampleUnit {
     }
 
     public function getUser(){
-        $res = $this->client->get('users',10);
-
-        var_dump($res);
+        var_dump($this->client->get('users',"10"));
     }
 
     public function searchUser(){
-
-        $res = $this->client->search('users', [
-            'users'=>[
-                "nome"=>"Mario",
-                "cognome"=>"Rosi",
-            ],
+        var_dump($this->client->search('users', [
+            "nome"=>"Mario",
+            "cognome"=>"Rossi",
+            'email'=>'helpdesk@bluservice.it',
             'page'=>1,
-            'limit'=>30
-        ]);
-
-        var_dump($res);
+            'limit'=>1
+        ]));
     }
 }

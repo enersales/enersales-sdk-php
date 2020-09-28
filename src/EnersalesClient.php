@@ -20,7 +20,7 @@ class EnersalesClient {
 	private $urlFileUpload = "files/upload";
 
 	private $urlUserGetOne = "user-manager/users/get";
-	private $urlUsersSearch = "users-manager/users";
+	private $urlUsersSearch = "user-manager/users";
 
 
 	private $urlDealCreate = "deals";
@@ -374,6 +374,7 @@ class EnersalesClient {
 		switch($entity){
 			case 'users':
 				$url = $this->urlUserGetOne."/".$id;
+				$url = ""; //For the moment
 			break;
 			case 'activities':
 				$url = $this->urlActivitiesGetOne."/".$id;
@@ -382,7 +383,7 @@ class EnersalesClient {
 
         $options = [
             'query'=> ''
-        ];
+		];
 
         $response = $this->request('GET', $url, $options);
         $responseRaw = $response->getBody()->getContents();
