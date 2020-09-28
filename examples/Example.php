@@ -8,14 +8,9 @@ class ExampleUnit {
     private $client;
 
     public function __construct(){
+        
         $credentials = json_decode(file_get_contents("./credentials/credentials-dev.json"), true); // Change this line to get your credentials
-        /*
-			$credentials = [
-				'instance'=>'your instance code',
-				'access_key'=>'YOUR ACCESS KEY',
-				'secret_key'=>'YOUR SECRET KEY',
-			]
-        */
+       
         $this->client = new \Enersales\EnersalesClient($credentials);
     }
     
@@ -224,5 +219,19 @@ class ExampleUnit {
         ]);
 
         var_dump($res);
+    }
+
+    public function getUser(){
+        var_dump($this->client->get('users',"10"));
+    }
+
+    public function searchUser(){
+        var_dump($this->client->search('users', [
+            "nome"=>"Mario",
+            "cognome"=>"Rossi",
+            'email'=>'helpdesk@bluservice.it',
+            'page'=>1,
+            'limit'=>1
+        ]));
     }
 }
