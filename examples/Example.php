@@ -10,7 +10,12 @@ class ExampleUnit {
     public function __construct(){
         
         $credentials = json_decode(file_get_contents("./credentials/credentials-dev.json"), true); // Change this line to get your credentials
-       
+        // $credentials = [
+        //     'env'=>'env',
+        //     'instance'=>'instance',
+        //     'access_key'=>'access_key',
+        //     'secret_key'=>'secret_key',
+        // ];
         $this->client = new \Enersales\EnersalesClient($credentials);
     }
     
@@ -223,6 +228,23 @@ class ExampleUnit {
 
     public function getUser(){
         var_dump($this->client->get('users',"10"));
+    }
+
+    public function getDeal(){
+        var_dump($this->client->get('deals',"2876"));
+        var_dump($this->client->get('deals',"2876")->data->titolo_opportunita);
+        var_dump($this->client->get('deals',"2876")->data->user_id);
+
+    }
+
+
+    public function getOrg(){
+        var_dump($this->client->get('organizations',"19144"));
+        var_dump($this->client->get('organizations',"19144")->data->id);
+    }
+    public function getPerson(){
+        var_dump($this->client->get('persons',"3817"));
+        var_dump($this->client->get('persons',"3817")->data->id);
     }
 
     public function searchUser(){

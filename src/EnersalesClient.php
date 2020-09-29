@@ -25,10 +25,12 @@ class EnersalesClient {
 
 	private $urlDealCreate = "deals";
 	private $urlDealUpdate = "deals";
-	
+
+	private $urlPersonGetOne = "persons/get";
 	private $urlPersonCreate = "persons";
 	private $urlPersonUpdate = "persons";
-	
+
+	private $urlOrganizationGetOne = "organizations/get";
 	private $urlOrganizationCreate = "organizations";
 	private $urlOrganizationUpdate = "organizations";
 	
@@ -41,6 +43,7 @@ class EnersalesClient {
 	private $urlActivitiesGetOne = "activities/get";
 	private $urlActivitiesSearch = "activities";
 
+	private $urlDealsGetOne = "deals/get";
 	private $urlDealSearch = "deals";
 	private $urlPersonSearch = "persons";
 	private $urlOrganizationSearch = "organizations";
@@ -378,6 +381,15 @@ class EnersalesClient {
 			break;
 			case 'activities':
 				$url = $this->urlActivitiesGetOne."/".$id;
+			break;
+			case 'deals':
+				$url = $this->urlDealsGetOne."/".$id;
+			break;
+			case 'persons':
+				$url = $this->urlPersonGetOne."/".$id;
+			break;
+			case 'organizations':
+				$url = $this->urlOrganizationGetOne."/".$id;
 			break;
 		}
 
