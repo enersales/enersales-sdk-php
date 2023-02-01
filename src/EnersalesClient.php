@@ -43,11 +43,15 @@ class EnersalesClient {
 	private $urlActivitiesGetOne = "activities/get";
 	private $urlActivitiesSearch = "activities";
 
+	private $urlPreventivesGetOne = "preventives/get";
+
 	private $urlDealsGetOne = "deals/get";
 	private $urlDealSearch = "deals";
 	private $urlPersonSearch = "persons";
 	private $urlOrganizationSearch = "organizations";
 	private $urlProductSearch = "products";
+
+	private $urlPreventivesSearch = "preventives/index";
 	
 	private $urlGetDataSchema = "data-schemes";
     private $urlGetForm = "forms/get";
@@ -369,9 +373,6 @@ class EnersalesClient {
         return $responseBody;
 	}
 	
-	/**
-	 * @todo add code for supporting deals,persons,org
-	 */
 	public function get(string $entity, $id ){
 
 		switch($entity){
@@ -390,6 +391,9 @@ class EnersalesClient {
 			break;
 			case 'organizations':
 				$url = $this->urlOrganizationGetOne."/".$id;
+			break;
+			case 'preventives':
+				$url = $this->urlPreventivesGetOne."/".$id;
 			break;
 		}
 
@@ -466,6 +470,10 @@ class EnersalesClient {
 			case "users":
 				$url = $this->urlUsersSearch;
 				break;
+
+			case "preventives":
+				$url = $this->urlPreventivesSearch;
+			break;
         }
 
         $options = [

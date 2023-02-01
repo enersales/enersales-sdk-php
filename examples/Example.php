@@ -11,11 +11,11 @@ class ExampleUnit {
         
         $credentials = json_decode(file_get_contents("./credentials/credentials-dev.json"), true); // Change this line to get your credentials
         // $credentials = [
-        //     'env'=>'env',
-        //     'instance'=>'instance',
-        //     'access_key'=>'access_key',
-        //     'secret_key'=>'secret_key',
-        // ];
+        //     'env'=>'dev',
+        //     'instance'=>'core01',
+        //     'access_key'=>'xxxx',
+        //     'secret_key'=>'xxxxx',
+        // ];;
         $this->client = new \Enersales\EnersalesClient($credentials);
     }
     
@@ -168,7 +168,7 @@ class ExampleUnit {
         $res = $this->client->search('persons', [
             'persons'=>[
                 "nome"=>"NewPERSON33",
-//               "cognome"=>"NewPERSON33",
+                // "cognome"=>"NewPERSON33",
             ],
             'page'=>1,
             'limit'=>30
@@ -217,10 +217,10 @@ class ExampleUnit {
             //'deal_id'=>'2852',
             //'organization_id'=>'18140',
             //'done'=>true
-//            'date_range'=>[
-//                'start'=>'2020-09-15',
-//                'end'=>'2020-09-16'
-//            ]
+            //  'date_range'=>[
+            //  'start'=>'2020-09-15',
+            //  'end'=>'2020-09-16'
+            //]
         ]);
 
         var_dump($res);
@@ -255,5 +255,27 @@ class ExampleUnit {
             'page'=>1,
             'limit'=>1
         ]));
+    }
+
+    public function getPreventives(){
+        $response = $this->client->search('preventives',[
+            'approved_date_start'=>date('Y-m-d',strtotime("-3 years")),
+            'approved_date_end'=>date('Y-m-d',strtotime("+2 years")),
+            // 'limit'=>2,
+            // 'page'=>2
+        ]);
+
+        if($response && $response->data){
+
+            foreach($response->data->results as $p){
+                print_r($p);
+    
+                $singleresponse = $this->client->get('preventives',$p->id);
+    
+                // print_r($singleresponse);
+            }
+    
+        }
+
     }
 }
