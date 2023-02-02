@@ -261,18 +261,19 @@ class ExampleUnit {
         $response = $this->client->search('preventives',[
             'approved_date_start'=>date('Y-m-d',strtotime("-3 years")),
             'approved_date_end'=>date('Y-m-d',strtotime("+2 years")),
-            // 'limit'=>2,
-            // 'page'=>2
+            'wid_deals'=>true,
+            'deal_id'=>5513,
+            'limit'=>2,
+            'page'=>1
         ]);
 
         if($response && $response->data){
 
             foreach($response->data->results as $p){
-                print_r($p);
     
                 $singleresponse = $this->client->get('preventives',$p->id);
     
-                // print_r($singleresponse);
+                print_r($singleresponse->data->products);
             }
     
         }
