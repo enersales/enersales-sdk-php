@@ -52,6 +52,8 @@ class EnersalesClient {
 	private $urlProductSearch = "products";
 
 	private $urlPreventivesSearch = "preventives/index";
+
+	private $urlMinisiteGetOneConfiguration = "minisite/configuration";
 	
 	private $urlGetDataSchema = "data-schemes";
     private $urlGetForm = "forms/get";
@@ -394,6 +396,9 @@ class EnersalesClient {
 			break;
 			case 'preventives':
 				$url = $this->urlPreventivesGetOne."/".$id;
+			break;
+			case 'minisite-configuration':
+				$url = $this->urlMinisiteGetOneConfiguration ."/".$id;
 			break;
 		}
 
